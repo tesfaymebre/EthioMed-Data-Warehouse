@@ -5,3 +5,6 @@ pandas
 numpy
 matplotlib
 seabornd
+emoji
+sqlalchemy
+psycopg2-binary
