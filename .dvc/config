@@ -1,0 +1,5 @@
+[core]
+    autostage = true
+    remote = ethiomed
+['remote "ethiomed"']
+    url = https://github.com/tesfaymebre/EthioMed-Data-Warehouse.git
