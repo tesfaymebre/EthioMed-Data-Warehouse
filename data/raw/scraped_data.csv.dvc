@@ -1,0 +1,5 @@
+outs:
+- md5: 6943063bba5a4b018c879cc3c7f4ad4e
+  size: 240597
+  hash: md5
+  path: scraped_data.csv
