@@ -30,6 +30,7 @@ class DatabaseManager:
         """Create and return the database engine."""
         try:
             database_url = f"postgresql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
+            logging.debug(f"Connecting to database with URL: {database_url}")  # Debug log
             self.engine = create_engine(database_url)
             
             # Test connection
