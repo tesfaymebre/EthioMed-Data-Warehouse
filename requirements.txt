@@ -1,0 +1,7 @@
+telethon
+python-dotenv
+beautifulsoup4
+pandas
+numpy
+matplotlib
+seabornd
