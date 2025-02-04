@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: telegram_data
+    schema: public   # Use the schema where your table resides
+    database: telegram_raw_data  # Correct database name
+    tables:
+      - name: telegram_messages
