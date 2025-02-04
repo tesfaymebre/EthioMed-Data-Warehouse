@@ -1,0 +1,21 @@
+version: 2
+models:
+  - name: final_transformed_messages
+    description: "Aggregated daily message and media counts by channel"
+    columns:
+      - name: channel_title
+        description: "Title of the Telegram channel"
+        tests:
+          - not_null
+      - name: message_day
+        description: "Date of the messages (day)"
+        tests:
+          - not_null
+      - name: total_messages
+        description: "Total number of messages for the day"
+        tests:
+          - not_null
+      - name: total_media
+        description: "Total number of media files for the day"
+        tests:
+          - not_null

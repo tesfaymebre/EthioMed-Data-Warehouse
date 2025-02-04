@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: messages_summary
+    columns:
+      - name: channel_title
+        tests:
+          - not_null
+      - name: total_messages
+        tests:
+          - not_null
