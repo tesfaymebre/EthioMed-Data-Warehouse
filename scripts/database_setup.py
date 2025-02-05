@@ -102,6 +102,59 @@ class DatabaseManager:
             logging.error(f"❌ Error inserting data: {e}")
             raise
 
+    def create_detected_objects_table(self):
+        """Create the detected_objects table if it does not exist."""
+        create_table_query = """
+        CREATE TABLE detected_objects (
+            id SERIAL PRIMARY KEY,
+            image_name TEXT NOT NULL,
+            class_id INTEGER NOT NULL,
+            x_center FLOAT NOT NULL,
+            y_center FLOAT NOT NULL,
+            width FLOAT NOT NULL,
+            height FLOAT NOT NULL,
+            confidence FLOAT NOT NULL,
+            detection_timestamp TIMESTAMP DEFAULT NOW()
+        );
+        """
+        try:
+            with self.engine.connect().execution_options(isolation_level="AUTOCOMMIT") as connection:
+                connection.execute(text(create_table_query))
+
+            logging.info("✅ Table 'detected_objects' created successfully.")
+        except Exception as e:
+            logging.error(f"❌ Error creating table: {e}")
+
+    def insert_detection_results(self, detection_results_df):
+        """Insert YOLOv5 detection results into the detected_objects table."""
+        try:
+            insert_query = """
+            INSERT INTO detected_objects (
+                image_name, class_id, x_center, y_center, width, height, confidence
+            ) VALUES (
+                :image_name, :class_id, :x_center, :y_center, :width, :height, :confidence
+            );
+            """
+            with self.engine.begin() as connection:
+                for _, row in detection_results_df.iterrows():
+                    connection.execute(
+                        text(insert_query),
+                        {
+                            "image_name": row["image_name"],
+                            "class_id": row["class_id"],
+                            "x_center": row["x_center"],
+                            "y_center": row["y_center"],
+                            "width": row["width"],
+                            "height": row["height"],
+                            "confidence": row["confidence"]
+                        }
+                    )
+            logging.info(f"✅ {len(detection_results_df)} detection results inserted into database.")
+        except Exception as e:
+            logging.error(f"❌ Error inserting detection results: {e}")
+            raise
+
+
 # Example Usage
 if __name__ == "__main__":
     db_manager = DatabaseManager()
