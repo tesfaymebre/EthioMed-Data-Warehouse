@@ -4,13 +4,6 @@ data/raw/photos
 *.log
 .env
 
-# YOLOv5 generated and unnecessary files
-scripts/yolov5/.git/
-scripts/yolov5/runs/
-scripts/yolov5/weights/
-scripts/yolov5/.cache/
-scripts/yolov5/hubconf.py
-scripts/yolov5/tests/
 
 # Detection results
 data/preprocessed/detection_results/run*/
